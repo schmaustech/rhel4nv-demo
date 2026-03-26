@@ -1,6 +1,6 @@
 # RHEL4NV Demo 
 
-**Goal**: The goal of this document is to provide the concise steps to enabling an updated kernel on an OpenShift deployment and then enabling the NVIDIA GPU Operator to compile and install properly.
+**Goal**: The goal of this document is to provide the concise steps to enabling an updated kernel on an OpenShift deployment and then enabling the NVIDIA Network Operator and NVIDIA GPU Operator to compile and install properly.
 
 ## Environment
 
@@ -77,21 +77,25 @@ erife-arm-openshift-4-21-5-gpu02   6.12.0-211.4.el10nv.aarch64+64k
 erife-arm-openshift-4-21-5-gpu03   6.12.0-211.4.el10nv.aarch64+64k
 ~~~
 
-Now we can proceed to ensuring we have the right DTK image tagged.  Since we changed the kernel of our OpenShift environment we need to also point to a DTK image that is updated with our kernel version.   While you can build an updated DTK image I am using a pre-built one `quay.io/ravanelli/staging:dtk-4nv-03242026-211.4el0nv` known to work with this kernel version.   To ensure the GPU operator will pick it up we will run the following command to setup the tag.
+## Driver ToolKit Image 
+
+Now we can proceed to ensuring we have the right DTK image tagged.  Since we changed the kernel of our OpenShift environment we need to also point to a DTK image that is updated with our kernel version.   While you can build an updated DTK image I am using a pre-built one `quay.io/ravanelli/staging:dtk-4nv-03262026-211.4el0nv` known to work with this kernel version.   To ensure the GPU operator will pick it up we will run the following command to setup the tag.
 
 ~~~bash
-$ oc tag -n openshift quay.io/ravanelli/staging:dtk-4nv-03242026-211.4el0nv openshift/driver-toolkit:10.1.20260126-0
-Tag driver-toolkit:10.1.20260126-0 set to quay.io/ravanelli/staging:dtk-4nv-03242026-211.4el0nv.
+$ oc tag -n quay.io/ravanelli/staging:dtk-4nv-03262026-211.4el0nv openshift/driver-toolkit:10.1.20260126-0
+Tag driver-toolkit:10.1.20260126-0 set to quay.io/ravanelli/staging:dtk-4nv-03262026-211.4el0nv.
 ~~~
 
 We can validate the tag by the following.
 
 ~~~bash
 $ oc get imagetag -n openshift|grep driver-toolkit
-driver-toolkit:10.1.20260126-0               Tag         image/sha256:7dba910fd3a88a98e10b72f807b3c49bdb6dfd49f2cc9822846ce97b1cffdd06   1         4 seconds ago
-driver-toolkit:9.6.20260303-1                Scheduled   image/sha256:20452648a60497336982393ea70789990072c363b752d56f5ab332acd1999b03   1         2 days ago
-driver-toolkit:latest                        Scheduled   image/sha256:20452648a60497336982393ea70789990072c363b752d56f5ab332acd1999b03   3         46 hours ago
+driver-toolkit:10.1.20260126-0               Tag         image/sha256:8f426c63d003b6e0fbec319f9615f6da743de2b6e415b90bb55f007c30cd0d25   2         3 hours ago
+driver-toolkit:9.6.20260303-1                Scheduled   image/sha256:20452648a60497336982393ea70789990072c363b752d56f5ab332acd1999b03   1         3 days ago
+driver-toolkit:latest                        Scheduled   image/sha256:20452648a60497336982393ea70789990072c363b752d56f5ab332acd1999b03   3         2 days ago
 ~~~
+
+## NFD Operator 
 
 Next we need to install the NFD Operator and configure its instance to ensure our nodes are labeled properly for the NVIDIA GPU Operator.  First let's generate the operator customer resource file to install the NFD Operator.
 
@@ -194,6 +198,260 @@ erife-arm-openshift-4-21-5-gpu01   Ready    control-plane,master,worker   2d21h 
 erife-arm-openshift-4-21-5-gpu02   Ready    control-plane,master,worker   2d21h   v1.34.2   beta.kubernetes.io/arch=arm64,beta.kubernetes.io/os=linux,cpumanager=false,feature.node.kubernetes.io/cpu-cpuid.AES=true,feature.node.kubernetes.io/cpu-cpuid.ASIMD=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDDP=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDFHM=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDHP=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDRDM=true,feature.node.kubernetes.io/cpu-cpuid.ATOMICS=true,feature.node.kubernetes.io/cpu-cpuid.BF16=true,feature.node.kubernetes.io/cpu-cpuid.BTI=true,feature.node.kubernetes.io/cpu-cpuid.CPUID=true,feature.node.kubernetes.io/cpu-cpuid.CRC32=true,feature.node.kubernetes.io/cpu-cpuid.DCPODP=true,feature.node.kubernetes.io/cpu-cpuid.DCPOP=true,feature.node.kubernetes.io/cpu-cpuid.DGH=true,feature.node.kubernetes.io/cpu-cpuid.DIT=true,feature.node.kubernetes.io/cpu-cpuid.EVTSTRM=true,feature.node.kubernetes.io/cpu-cpuid.FCMA=true,feature.node.kubernetes.io/cpu-cpuid.FLAGM2=true,feature.node.kubernetes.io/cpu-cpuid.FLAGM=true,feature.node.kubernetes.io/cpu-cpuid.FP=true,feature.node.kubernetes.io/cpu-cpuid.FPHP=true,feature.node.kubernetes.io/cpu-cpuid.FRINT=true,feature.node.kubernetes.io/cpu-cpuid.I8MM=true,feature.node.kubernetes.io/cpu-cpuid.ILRCPC=true,feature.node.kubernetes.io/cpu-cpuid.JSCVT=true,feature.node.kubernetes.io/cpu-cpuid.LRCPC=true,feature.node.kubernetes.io/cpu-cpuid.PACA=true,feature.node.kubernetes.io/cpu-cpuid.PACG=true,feature.node.kubernetes.io/cpu-cpuid.PMULL=true,feature.node.kubernetes.io/cpu-cpuid.SB=true,feature.node.kubernetes.io/cpu-cpuid.SHA1=true,feature.node.kubernetes.io/cpu-cpuid.SHA2=true,feature.node.kubernetes.io/cpu-cpuid.SHA3=true,feature.node.kubernetes.io/cpu-cpuid.SHA512=true,feature.node.kubernetes.io/cpu-cpuid.SM3=true,feature.node.kubernetes.io/cpu-cpuid.SM4=true,feature.node.kubernetes.io/cpu-cpuid.SVE2=true,feature.node.kubernetes.io/cpu-cpuid.SVE=true,feature.node.kubernetes.io/cpu-cpuid.SVEAES=true,feature.node.kubernetes.io/cpu-cpuid.SVEBF16=true,feature.node.kubernetes.io/cpu-cpuid.SVEBITPERM=true,feature.node.kubernetes.io/cpu-cpuid.SVEI8MM=true,feature.node.kubernetes.io/cpu-cpuid.SVEPMULL=true,feature.node.kubernetes.io/cpu-cpuid.SVESHA3=true,feature.node.kubernetes.io/cpu-cpuid.SVESM4=true,feature.node.kubernetes.io/cpu-cpuid.USCAT=true,feature.node.kubernetes.io/cpu-hardware_multithreading=false,feature.node.kubernetes.io/cpu-model.family=15,feature.node.kubernetes.io/cpu-model.id=54512,feature.node.kubernetes.io/cpu-model.vendor_id=ARM,feature.node.kubernetes.io/kernel-config.NO_HZ=true,feature.node.kubernetes.io/kernel-config.NO_HZ_FULL=true,feature.node.kubernetes.io/kernel-selinux.enabled=true,feature.node.kubernetes.io/kernel-version.full=6.12.0-211.4.el10nv.aarch64_64k,feature.node.kubernetes.io/kernel-version.major=6,feature.node.kubernetes.io/kernel-version.minor=12,feature.node.kubernetes.io/kernel-version.revision=0,feature.node.kubernetes.io/memory-numa=true,feature.node.kubernetes.io/network-sriov.capable=true,feature.node.kubernetes.io/pci-10de.present=true,feature.node.kubernetes.io/pci-10de.sriov.capable=true,feature.node.kubernetes.io/pci-15b3.present=true,feature.node.kubernetes.io/pci-15b3.sriov.capable=true,feature.node.kubernetes.io/pci-1a03.present=true,feature.node.kubernetes.io/pci-8086.present=true,feature.node.kubernetes.io/rdma.capable=true,feature.node.kubernetes.io/storage-nonrotationaldisk=true,feature.node.kubernetes.io/system-os_release.ID=rhel,feature.node.kubernetes.io/system-os_release.OPENSHIFT_VERSION=4.21,feature.node.kubernetes.io/system-os_release.OSTREE_VERSION=10.1.20260126-0,feature.node.kubernetes.io/system-os_release.VERSION_ID.major=10,feature.node.kubernetes.io/system-os_release.VERSION_ID.minor=1,feature.node.kubernetes.io/system-os_release.VERSION_ID=10.1,kubernetes.io/arch=arm64,kubernetes.io/hostname=erife-arm-openshift-4-21-5-gpu02,kubernetes.io/os=linux,machine-type.node.kubevirt.io/virt-rhel9.0.0=true,machine-type.node.kubevirt.io/virt-rhel9.2.0=true,machine-type.node.kubevirt.io/virt-rhel9.4.0=true,machine-type.node.kubevirt.io/virt-rhel9.6.0=true,machine-type.node.kubevirt.io/virt=true,network.nvidia.com/operator.mofed.wait=false,network.nvidia.com/operator.nic-configuration.wait=false,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhel,nvidia.com/gpu-driver-upgrade-state=upgrade-done,nvidia.com/gpu.deploy.container-toolkit=true,nvidia.com/gpu.deploy.dcgm-exporter=true,nvidia.com/gpu.deploy.dcgm=true,nvidia.com/gpu.deploy.device-plugin=true,nvidia.com/gpu.deploy.driver=true,nvidia.com/gpu.deploy.gpu-feature-discovery=true,nvidia.com/gpu.deploy.node-status-exporter=true,nvidia.com/gpu.deploy.nvsm=,nvidia.com/gpu.deploy.operator-validator=true,nvidia.com/gpu.present=true,topology.topolvm.io/node=erife-arm-openshift-4-21-5-gpu02
 erife-arm-openshift-4-21-5-gpu03   Ready    control-plane,master,worker   2d20h   v1.34.2   beta.kubernetes.io/arch=arm64,beta.kubernetes.io/os=linux,cpumanager=false,feature.node.kubernetes.io/cpu-cpuid.AES=true,feature.node.kubernetes.io/cpu-cpuid.ASIMD=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDDP=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDFHM=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDHP=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDRDM=true,feature.node.kubernetes.io/cpu-cpuid.ATOMICS=true,feature.node.kubernetes.io/cpu-cpuid.BF16=true,feature.node.kubernetes.io/cpu-cpuid.BTI=true,feature.node.kubernetes.io/cpu-cpuid.CPUID=true,feature.node.kubernetes.io/cpu-cpuid.CRC32=true,feature.node.kubernetes.io/cpu-cpuid.DCPODP=true,feature.node.kubernetes.io/cpu-cpuid.DCPOP=true,feature.node.kubernetes.io/cpu-cpuid.DGH=true,feature.node.kubernetes.io/cpu-cpuid.DIT=true,feature.node.kubernetes.io/cpu-cpuid.EVTSTRM=true,feature.node.kubernetes.io/cpu-cpuid.FCMA=true,feature.node.kubernetes.io/cpu-cpuid.FLAGM2=true,feature.node.kubernetes.io/cpu-cpuid.FLAGM=true,feature.node.kubernetes.io/cpu-cpuid.FP=true,feature.node.kubernetes.io/cpu-cpuid.FPHP=true,feature.node.kubernetes.io/cpu-cpuid.FRINT=true,feature.node.kubernetes.io/cpu-cpuid.I8MM=true,feature.node.kubernetes.io/cpu-cpuid.ILRCPC=true,feature.node.kubernetes.io/cpu-cpuid.JSCVT=true,feature.node.kubernetes.io/cpu-cpuid.LRCPC=true,feature.node.kubernetes.io/cpu-cpuid.PACA=true,feature.node.kubernetes.io/cpu-cpuid.PACG=true,feature.node.kubernetes.io/cpu-cpuid.PMULL=true,feature.node.kubernetes.io/cpu-cpuid.SB=true,feature.node.kubernetes.io/cpu-cpuid.SHA1=true,feature.node.kubernetes.io/cpu-cpuid.SHA2=true,feature.node.kubernetes.io/cpu-cpuid.SHA3=true,feature.node.kubernetes.io/cpu-cpuid.SHA512=true,feature.node.kubernetes.io/cpu-cpuid.SM3=true,feature.node.kubernetes.io/cpu-cpuid.SM4=true,feature.node.kubernetes.io/cpu-cpuid.SVE2=true,feature.node.kubernetes.io/cpu-cpuid.SVE=true,feature.node.kubernetes.io/cpu-cpuid.SVEAES=true,feature.node.kubernetes.io/cpu-cpuid.SVEBF16=true,feature.node.kubernetes.io/cpu-cpuid.SVEBITPERM=true,feature.node.kubernetes.io/cpu-cpuid.SVEI8MM=true,feature.node.kubernetes.io/cpu-cpuid.SVEPMULL=true,feature.node.kubernetes.io/cpu-cpuid.SVESHA3=true,feature.node.kubernetes.io/cpu-cpuid.SVESM4=true,feature.node.kubernetes.io/cpu-cpuid.USCAT=true,feature.node.kubernetes.io/cpu-hardware_multithreading=false,feature.node.kubernetes.io/cpu-model.family=15,feature.node.kubernetes.io/cpu-model.id=54512,feature.node.kubernetes.io/cpu-model.vendor_id=ARM,feature.node.kubernetes.io/kernel-config.NO_HZ=true,feature.node.kubernetes.io/kernel-config.NO_HZ_FULL=true,feature.node.kubernetes.io/kernel-selinux.enabled=true,feature.node.kubernetes.io/kernel-version.full=6.12.0-211.4.el10nv.aarch64_64k,feature.node.kubernetes.io/kernel-version.major=6,feature.node.kubernetes.io/kernel-version.minor=12,feature.node.kubernetes.io/kernel-version.revision=0,feature.node.kubernetes.io/memory-numa=true,feature.node.kubernetes.io/network-sriov.capable=true,feature.node.kubernetes.io/pci-10de.present=true,feature.node.kubernetes.io/pci-10de.sriov.capable=true,feature.node.kubernetes.io/pci-15b3.present=true,feature.node.kubernetes.io/pci-15b3.sriov.capable=true,feature.node.kubernetes.io/pci-1a03.present=true,feature.node.kubernetes.io/pci-8086.present=true,feature.node.kubernetes.io/rdma.capable=true,feature.node.kubernetes.io/storage-nonrotationaldisk=true,feature.node.kubernetes.io/system-os_release.ID=rhel,feature.node.kubernetes.io/system-os_release.OPENSHIFT_VERSION=4.21,feature.node.kubernetes.io/system-os_release.OSTREE_VERSION=10.1.20260126-0,feature.node.kubernetes.io/system-os_release.VERSION_ID.major=10,feature.node.kubernetes.io/system-os_release.VERSION_ID.minor=1,feature.node.kubernetes.io/system-os_release.VERSION_ID=10.1,kubernetes.io/arch=arm64,kubernetes.io/hostname=erife-arm-openshift-4-21-5-gpu03,kubernetes.io/os=linux,machine-type.node.kubevirt.io/virt-rhel9.0.0=true,machine-type.node.kubevirt.io/virt-rhel9.2.0=true,machine-type.node.kubevirt.io/virt-rhel9.4.0=true,machine-type.node.kubevirt.io/virt-rhel9.6.0=true,machine-type.node.kubevirt.io/virt=true,network.nvidia.com/operator.mofed.wait=false,network.nvidia.com/operator.nic-configuration.wait=false,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhel,nvidia.com/gpu-driver-upgrade-state=upgrade-done,nvidia.com/gpu.deploy.container-toolkit=true,nvidia.com/gpu.deploy.dcgm-exporter=true,nvidia.com/gpu.deploy.dcgm=true,nvidia.com/gpu.deploy.device-plugin=true,nvidia.com/gpu.deploy.driver=true,nvidia.com/gpu.deploy.gpu-feature-discovery=true,nvidia.com/gpu.deploy.node-status-exporter=true,nvidia.com/gpu.deploy.nvsm=,nvidia.com/gpu.deploy.operator-validator=true,nvidia.com/gpu.present=true,topology.topolvm.io/node=erife-arm-openshift-4-21-5-gpu03
 ~~~
+
+## NVIDIA Network Operator
+
+With NFD installed we can move onto installing and configuring the NVIDIA Network Operator. The first thing we will need to do is generate the custom resource file to install the operator.  Note that as of this writing the v26.1 release of the NVIDIA Network Operator was not available for OpenShift 4.21 so v25.10 of the operator is being used here.
+
+~~~bash
+$ cat <<EOF >nno-operator.yaml 
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nvidia-network-operator
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: nvidia-network-operator
+  namespace: nvidia-network-operator
+spec:
+  targetNamespaces:
+  - nvidia-network-operator
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: nvidia-network-operator
+  namespace: nvidia-network-operator
+spec:
+  channel: v25.10
+  installPlanApproval: Automatic
+  name: nvidia-network-operator
+  source: certified-operators
+  sourceNamespace: openshift-marketplace
+EOF
+~~~
+
+With the file generated we can create it on the cluster.
+
+~~~bash
+$ oc create -f nno-operator.yaml 
+namespace/nvidia-network-operator created
+operatorgroup.operators.coreos.com/nvidia-network-operator created
+subscription.operators.coreos.com/nvidia-network-operator created
+~~~
+
+We can vaidate the NVIDIA Network Operator is running by the following.
+
+~~~bash
+$ oc get pods -n nvidia-network-operator
+NAME                                                         READY   STATUS        RESTARTS   AGE
+nvidia-network-operator-controller-manager-87cf46bcc-h6wzn   1/1     Running       0          116m
+~~~
+
+Now that the operator is up and running we can go ahead and configure a basic driver policy. In order to match the kernel we have installed on this cluster I had to do some tagging magic from NVIDIA's registry and then push it up to our own private registry.
+
+~~~bash
+# podman tag nvcr.io/nvidia/mellanox/doca-driver:doca3.3.0-26.01-1.0.0.0-0-rhel10.0-arm64 quay.io/redhat_emp1/ecosys-nvidia/doca-driver:doca3.3.0-26.01-1.0.0.0-0-rhel10.1-arm64
+# podman push quay.io/redhat_emp1/ecosys-nvidia/doca-driver:doca3.3.0-26.01-1.0.0.0-0-rhel10.1-arm64
+~~~
+
+Now in the NicClusterPolicy we can specific the DOCA version and it will be able to find the right tag from our registry.
+
+~~~bash
+$ cat <<EOF >nicclusterpolicy.yaml 
+apiVersion: mellanox.com/v1alpha1
+kind: NicClusterPolicy
+metadata:
+  name: nic-cluster-policy
+spec:
+  ofedDriver:
+    imagePullSecrets: []
+    readinessProbe:
+      initialDelaySeconds: 10
+      periodSeconds: 30
+    forcePrecompiled: false
+    terminationGracePeriodSeconds: 300
+    repository: quay.io/redhat_emp1/ecosys-nvidia
+    livenessProbe:
+      initialDelaySeconds: 30
+      periodSeconds: 30
+    upgradePolicy:
+      autoUpgrade: true
+      drain:
+        deleteEmptyDir: true
+        enable: true
+        force: true
+        podSelector: ''
+        timeoutSeconds: 300
+      maxParallelUpgrades: 1
+      safeLoad: false
+    startupProbe:
+      initialDelaySeconds: 10
+      periodSeconds: 20
+    version: doca3.3.0-26.01-1.0.0.0-0
+    image: doca-driver
+    env:
+    - name: UNLOAD_STORAGE_MODULES
+      value: "true"
+    - name: RESTORE_DRIVER_ON_POD_TERMINATION
+      value: "true"
+    - name: CREATE_IFNAMES_UDEV
+      value: "true"
+    - name: ENTRYPOINT_DEBUG
+      value: 'true'
+EOF
+~~~
+
+Once we have generated the NicClusterPolicy we can create it on the cluster.
+
+~~~bash
+$ oc create -f nicclusterpolicy.yaml 
+nicclusterpolicy.mellanox.com/nic-cluster-policy created
+~~~
+
+The NicClusterPolicy will take ~5 minutes to complete as it builds the drivers and then ultimately unloads the in-tree mlx5 drivers and loads the out-of-tree drivers.  After that time we should see mofed pods that are in a 2/2 ready state.  The number of mofed pods will be based on the number of nodes that have valid Mellanox devices in them.
+
+~~~bash
+$ oc get pods -n nvidia-network-operator
+NAME                                                         READY   STATUS    RESTARTS        AGE
+mofed-rhel10.1-547d75b4d8-ds-9psph                           2/2     Running   0               21m
+mofed-rhel10.1-547d75b4d8-ds-j5mcf                           2/2     Running   0               21m
+mofed-rhel10.1-547d75b4d8-ds-zx6fj                           2/2     Running   0               13m
+nvidia-network-operator-controller-manager-87cf46bcc-h6wzn   1/1     Running   5 (6m27s ago)   5h44m
+~~~
+
+We can further validate by going into one of the mofed pods and running a few commands.
+
+~~~bash
+$ oc rsh -n nvidia-network-operator mofed-rhel10.1-547d75b4d8-ds-9psph
+Defaulted container "mofed-container" out of: mofed-container, openshift-driver-toolkit-ctr, network-operator-init-container (init)
+
+sh-5.2# lsmod|grep mlx5
+mlx5_vdpa             196608  0
+mlx5_ib               720896  0
+ib_uverbs             393216  2 rdma_ucm,mlx5_ib
+mlx5_core            3080192  1 mlx5_ib
+mlxfw                 262144  1 mlx5_core
+mlxdevm               589824  1 mlx5_core
+ib_core               655360  8 rdma_cm,ib_ipoib,iw_cm,ib_umad,rdma_ucm,ib_uverbs,mlx5_ib,ib_cm
+mlx_compat            196608  12 rdma_cm,ib_ipoib,mlxdevm,iw_cm,ib_umad,mlx5_vdpa,ib_core,rdma_ucm,ib_uverbs,mlx5_ib,ib_cm,mlx5_core
+macsec                262144  1 mlx5_ib
+psample               262144  2 openvswitch,mlx5_core
+pci_hyperv_intf       196608  1 mlx5_core
+tls                   327680  1 mlx5_core
+
+sh-5.2# ofed_info 
+OFED-internal-26.01-1.0.0:
+
+clusterkit:
+mlnx_ofed_clusterkit/clusterkit-1.15.475-1.20260211.db5c406.src.rpm
+
+dpcp:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/dpcp/1.1.59-1/dpcp-1.1.59-1.src.rpm
+ibarr:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/ibarr/2601.0.0-1/ibarr-2601.0.0-1.src.rpm
+ibdump:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/ibdump/6.0.0-2/ibdump-6.0.0-2.src.rpm
+ibsim:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/ibsim/0.12.1-4/ibsim-0.12.1-4.src.rpm
+ibutils2:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/ibutils2/2.1.1-0.22400.MLNX202601152019.ge04c0b67f/ibutils2-2.1.1-0.22400.MLNX202601152019.ge04c0b67f.src.rpm
+iser:
+https://git-nbu.nvidia.com/r/a/mlnx_ofed/mlnx-ofa_kernel-4.0.git mlnx_ofed_26_01
+commit 3735cf8688bf9d9bd5a425b0780a10c506abd04e
+
+isert:
+https://git-nbu.nvidia.com/r/a/mlnx_ofed/mlnx-ofa_kernel-4.0.git mlnx_ofed_26_01
+commit 3735cf8688bf9d9bd5a425b0780a10c506abd04e
+
+kernel-mft:
+mlnx_ofed_mft/kernel-mft-4.35.0-159.src.rpm
+
+libvma:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/libvma/9.8.84-1/libvma-9.8.84-1.src.rpm
+libxlio:
+/sw/release/sw_acceleration/xlio/libxlio-3.61.2-1.src.rpm
+
+mlnx-ethtool:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/mlnx-ethtool/2601.0.2-1/mlnx-ethtool-2601.0.2-1.src.rpm
+mlnx-iproute2:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/mlnx-iproute2/2601.0.6-1/mlnx-iproute2-2601.0.6-1.src.rpm
+mlnx-nfsrdma:
+https://git-nbu.nvidia.com/r/a/mlnx_ofed/mlnx-ofa_kernel-4.0.git mlnx_ofed_26_01
+commit 3735cf8688bf9d9bd5a425b0780a10c506abd04e
+
+mlnx-nvme:
+https://git-nbu.nvidia.com/r/a/mlnx_ofed/mlnx-ofa_kernel-4.0.git mlnx_ofed_26_01
+commit 3735cf8688bf9d9bd5a425b0780a10c506abd04e
+
+mlnx-ofa_kernel:
+https://git-nbu.nvidia.com/r/a/mlnx_ofed/mlnx-ofa_kernel-4.0.git mlnx_ofed_26_01
+commit 3735cf8688bf9d9bd5a425b0780a10c506abd04e
+
+mlnx-tools:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/mlnx-tools/2601.0.2-1/mlnx-tools-2601.0.2-1.src.rpm
+mlx-steering-dump:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/mlx-steering-dump/1.0.0-1/mlx-steering-dump-1.0.0-1.src.rpm
+multiperf:
+https://git-nbu.nvidia.com/r/a/Performance/multiperf rdma-core-support
+commit d3fad92dc6984e43cc5377ba0a3126808432ce2d
+
+ofed-docs:
+https://git-nbu.nvidia.com/r/a/mlnx_ofed/ofed-docs.git mlnx_ofed-4.0
+commit 3d1b0afb7bc190ae5f362223043f76b2b45971cc
+
+openmpi:
+mlnx_ofed_ompi_1.8/openmpi-4.1.9a1-1.20260211.81d402c97a.src.rpm
+
+opensm:
+mlnx_ofed_opensm/opensm-5.26.1-202601271032.8c07ef43.tar.gz
+
+openvswitch:
+https://git-nbu.nvidia.com/r/a/sdn/ovs.git 3.3_head
+commit 7b1c64c2d4109b7c98635cb7d92a57da5f143588
+
+perftest:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/perftest/26.01.5-1/perftest-26.01.5-1.src.rpm
+rdma-core:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/rdma-core/2601.0.7-1/rdma-core-2601.0.7-1.src.rpm
+rshim:
+/sw_mc_soc_release/packages//rshim-2.6.6-0.g0ff6d20.src.rpm
+
+sockperf:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/sockperf/3.1-1/sockperf-3.1-1.src.rpm
+srp:
+https://git-nbu.nvidia.com/r/a/mlnx_ofed/mlnx-ofa_kernel-4.0.git mlnx_ofed_26_01
+commit 3735cf8688bf9d9bd5a425b0780a10c506abd04e
+
+ucx:
+mlnx_ofed_ucx/ucx-1.20.0-1.20260211.d9a4f352d.src.rpm
+
+virtiofs:
+https://git-nbu.nvidia.com/r/a/mlnx_ofed/mlnx-ofa_kernel-4.0.git mlnx_ofed_26_01
+commit 3735cf8688bf9d9bd5a425b0780a10c506abd04e
+
+xpmem:
+https://doca-repo-prod.nvidia.com/public-nsb/repo/doca/prime/generic-rpm/x86_64/xpmem/2601.0.9-1/dkms/xpmem-2601.0.9-1.src.rpm
+
+Installed Packages:
+-------------------
+
+mlnx-ofa_kernel-debugsource
+mlnx-tools
+mlnx-ofa_kernel
+mlnx-ofa_kernel-devel-debuginfo
+mlnx-ofa_kernel-modules-debuginfo
+xpmem-modules
+xpmem
+mlnx-ofa_kernel-source
+mlnx-ofa_kernel-modules
+mlnx-ofa_kernel-devel
+kernel-mft
+~~~
+
+## NVIDIA GPU Operator
 
 If everything is still looking good we can now move onto installing the NVIDIA GPU Operator.  The first step here is to generate the NVIDIA Network Operator custom resource file.
 
