@@ -190,6 +190,9 @@ operatorgroup.operators.coreos.com/openshift-nfd created
 subscription.operators.coreos.com/nfd created
 
 $ oc get nodes --show-labels | grep feature.node
+erife-arm-openshift-4-21-5-gpu01   Ready    control-plane,master,worker   2d21h   v1.34.2   beta.kubernetes.io/arch=arm64,beta.kubernetes.io/os=linux,cpumanager=false,feature.node.kubernetes.io/cpu-cpuid.AES=true,feature.node.kubernetes.io/cpu-cpuid.ASIMD=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDDP=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDFHM=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDHP=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDRDM=true,feature.node.kubernetes.io/cpu-cpuid.ATOMICS=true,feature.node.kubernetes.io/cpu-cpuid.BF16=true,feature.node.kubernetes.io/cpu-cpuid.BTI=true,feature.node.kubernetes.io/cpu-cpuid.CPUID=true,feature.node.kubernetes.io/cpu-cpuid.CRC32=true,feature.node.kubernetes.io/cpu-cpuid.DCPODP=true,feature.node.kubernetes.io/cpu-cpuid.DCPOP=true,feature.node.kubernetes.io/cpu-cpuid.DGH=true,feature.node.kubernetes.io/cpu-cpuid.DIT=true,feature.node.kubernetes.io/cpu-cpuid.EVTSTRM=true,feature.node.kubernetes.io/cpu-cpuid.FCMA=true,feature.node.kubernetes.io/cpu-cpuid.FLAGM2=true,feature.node.kubernetes.io/cpu-cpuid.FLAGM=true,feature.node.kubernetes.io/cpu-cpuid.FP=true,feature.node.kubernetes.io/cpu-cpuid.FPHP=true,feature.node.kubernetes.io/cpu-cpuid.FRINT=true,feature.node.kubernetes.io/cpu-cpuid.I8MM=true,feature.node.kubernetes.io/cpu-cpuid.ILRCPC=true,feature.node.kubernetes.io/cpu-cpuid.JSCVT=true,feature.node.kubernetes.io/cpu-cpuid.LRCPC=true,feature.node.kubernetes.io/cpu-cpuid.PACA=true,feature.node.kubernetes.io/cpu-cpuid.PACG=true,feature.node.kubernetes.io/cpu-cpuid.PMULL=true,feature.node.kubernetes.io/cpu-cpuid.SB=true,feature.node.kubernetes.io/cpu-cpuid.SHA1=true,feature.node.kubernetes.io/cpu-cpuid.SHA2=true,feature.node.kubernetes.io/cpu-cpuid.SHA3=true,feature.node.kubernetes.io/cpu-cpuid.SHA512=true,feature.node.kubernetes.io/cpu-cpuid.SM3=true,feature.node.kubernetes.io/cpu-cpuid.SM4=true,feature.node.kubernetes.io/cpu-cpuid.SVE2=true,feature.node.kubernetes.io/cpu-cpuid.SVE=true,feature.node.kubernetes.io/cpu-cpuid.SVEAES=true,feature.node.kubernetes.io/cpu-cpuid.SVEBF16=true,feature.node.kubernetes.io/cpu-cpuid.SVEBITPERM=true,feature.node.kubernetes.io/cpu-cpuid.SVEI8MM=true,feature.node.kubernetes.io/cpu-cpuid.SVEPMULL=true,feature.node.kubernetes.io/cpu-cpuid.SVESHA3=true,feature.node.kubernetes.io/cpu-cpuid.SVESM4=true,feature.node.kubernetes.io/cpu-cpuid.USCAT=true,feature.node.kubernetes.io/cpu-hardware_multithreading=false,feature.node.kubernetes.io/cpu-model.family=15,feature.node.kubernetes.io/cpu-model.id=54512,feature.node.kubernetes.io/cpu-model.vendor_id=ARM,feature.node.kubernetes.io/kernel-config.NO_HZ=true,feature.node.kubernetes.io/kernel-config.NO_HZ_FULL=true,feature.node.kubernetes.io/kernel-selinux.enabled=true,feature.node.kubernetes.io/kernel-version.full=6.12.0-211.4.el10nv.aarch64_64k,feature.node.kubernetes.io/kernel-version.major=6,feature.node.kubernetes.io/kernel-version.minor=12,feature.node.kubernetes.io/kernel-version.revision=0,feature.node.kubernetes.io/memory-numa=true,feature.node.kubernetes.io/network-sriov.capable=true,feature.node.kubernetes.io/pci-10de.present=true,feature.node.kubernetes.io/pci-10de.sriov.capable=true,feature.node.kubernetes.io/pci-15b3.present=true,feature.node.kubernetes.io/pci-15b3.sriov.capable=true,feature.node.kubernetes.io/pci-1a03.present=true,feature.node.kubernetes.io/pci-8086.present=true,feature.node.kubernetes.io/rdma.capable=true,feature.node.kubernetes.io/storage-nonrotationaldisk=true,feature.node.kubernetes.io/system-os_release.ID=rhel,feature.node.kubernetes.io/system-os_release.OPENSHIFT_VERSION=4.21,feature.node.kubernetes.io/system-os_release.OSTREE_VERSION=10.1.20260126-0,feature.node.kubernetes.io/system-os_release.VERSION_ID.major=10,feature.node.kubernetes.io/system-os_release.VERSION_ID.minor=1,feature.node.kubernetes.io/system-os_release.VERSION_ID=10.1,kubernetes.io/arch=arm64,kubernetes.io/hostname=erife-arm-openshift-4-21-5-gpu01,kubernetes.io/os=linux,machine-type.node.kubevirt.io/virt-rhel9.0.0=true,machine-type.node.kubevirt.io/virt-rhel9.2.0=true,machine-type.node.kubevirt.io/virt-rhel9.4.0=true,machine-type.node.kubevirt.io/virt-rhel9.6.0=true,machine-type.node.kubevirt.io/virt=true,network.nvidia.com/operator.mofed.wait=false,network.nvidia.com/operator.nic-configuration.wait=false,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhel,nvidia.com/gpu-driver-upgrade-state=upgrade-done,nvidia.com/gpu.deploy.container-toolkit=true,nvidia.com/gpu.deploy.dcgm-exporter=true,nvidia.com/gpu.deploy.dcgm=true,nvidia.com/gpu.deploy.device-plugin=true,nvidia.com/gpu.deploy.driver=true,nvidia.com/gpu.deploy.gpu-feature-discovery=true,nvidia.com/gpu.deploy.node-status-exporter=true,nvidia.com/gpu.deploy.nvsm=,nvidia.com/gpu.deploy.operator-validator=true,nvidia.com/gpu.present=true,topology.topolvm.io/node=erife-arm-openshift-4-21-5-gpu01
+erife-arm-openshift-4-21-5-gpu02   Ready    control-plane,master,worker   2d21h   v1.34.2   beta.kubernetes.io/arch=arm64,beta.kubernetes.io/os=linux,cpumanager=false,feature.node.kubernetes.io/cpu-cpuid.AES=true,feature.node.kubernetes.io/cpu-cpuid.ASIMD=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDDP=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDFHM=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDHP=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDRDM=true,feature.node.kubernetes.io/cpu-cpuid.ATOMICS=true,feature.node.kubernetes.io/cpu-cpuid.BF16=true,feature.node.kubernetes.io/cpu-cpuid.BTI=true,feature.node.kubernetes.io/cpu-cpuid.CPUID=true,feature.node.kubernetes.io/cpu-cpuid.CRC32=true,feature.node.kubernetes.io/cpu-cpuid.DCPODP=true,feature.node.kubernetes.io/cpu-cpuid.DCPOP=true,feature.node.kubernetes.io/cpu-cpuid.DGH=true,feature.node.kubernetes.io/cpu-cpuid.DIT=true,feature.node.kubernetes.io/cpu-cpuid.EVTSTRM=true,feature.node.kubernetes.io/cpu-cpuid.FCMA=true,feature.node.kubernetes.io/cpu-cpuid.FLAGM2=true,feature.node.kubernetes.io/cpu-cpuid.FLAGM=true,feature.node.kubernetes.io/cpu-cpuid.FP=true,feature.node.kubernetes.io/cpu-cpuid.FPHP=true,feature.node.kubernetes.io/cpu-cpuid.FRINT=true,feature.node.kubernetes.io/cpu-cpuid.I8MM=true,feature.node.kubernetes.io/cpu-cpuid.ILRCPC=true,feature.node.kubernetes.io/cpu-cpuid.JSCVT=true,feature.node.kubernetes.io/cpu-cpuid.LRCPC=true,feature.node.kubernetes.io/cpu-cpuid.PACA=true,feature.node.kubernetes.io/cpu-cpuid.PACG=true,feature.node.kubernetes.io/cpu-cpuid.PMULL=true,feature.node.kubernetes.io/cpu-cpuid.SB=true,feature.node.kubernetes.io/cpu-cpuid.SHA1=true,feature.node.kubernetes.io/cpu-cpuid.SHA2=true,feature.node.kubernetes.io/cpu-cpuid.SHA3=true,feature.node.kubernetes.io/cpu-cpuid.SHA512=true,feature.node.kubernetes.io/cpu-cpuid.SM3=true,feature.node.kubernetes.io/cpu-cpuid.SM4=true,feature.node.kubernetes.io/cpu-cpuid.SVE2=true,feature.node.kubernetes.io/cpu-cpuid.SVE=true,feature.node.kubernetes.io/cpu-cpuid.SVEAES=true,feature.node.kubernetes.io/cpu-cpuid.SVEBF16=true,feature.node.kubernetes.io/cpu-cpuid.SVEBITPERM=true,feature.node.kubernetes.io/cpu-cpuid.SVEI8MM=true,feature.node.kubernetes.io/cpu-cpuid.SVEPMULL=true,feature.node.kubernetes.io/cpu-cpuid.SVESHA3=true,feature.node.kubernetes.io/cpu-cpuid.SVESM4=true,feature.node.kubernetes.io/cpu-cpuid.USCAT=true,feature.node.kubernetes.io/cpu-hardware_multithreading=false,feature.node.kubernetes.io/cpu-model.family=15,feature.node.kubernetes.io/cpu-model.id=54512,feature.node.kubernetes.io/cpu-model.vendor_id=ARM,feature.node.kubernetes.io/kernel-config.NO_HZ=true,feature.node.kubernetes.io/kernel-config.NO_HZ_FULL=true,feature.node.kubernetes.io/kernel-selinux.enabled=true,feature.node.kubernetes.io/kernel-version.full=6.12.0-211.4.el10nv.aarch64_64k,feature.node.kubernetes.io/kernel-version.major=6,feature.node.kubernetes.io/kernel-version.minor=12,feature.node.kubernetes.io/kernel-version.revision=0,feature.node.kubernetes.io/memory-numa=true,feature.node.kubernetes.io/network-sriov.capable=true,feature.node.kubernetes.io/pci-10de.present=true,feature.node.kubernetes.io/pci-10de.sriov.capable=true,feature.node.kubernetes.io/pci-15b3.present=true,feature.node.kubernetes.io/pci-15b3.sriov.capable=true,feature.node.kubernetes.io/pci-1a03.present=true,feature.node.kubernetes.io/pci-8086.present=true,feature.node.kubernetes.io/rdma.capable=true,feature.node.kubernetes.io/storage-nonrotationaldisk=true,feature.node.kubernetes.io/system-os_release.ID=rhel,feature.node.kubernetes.io/system-os_release.OPENSHIFT_VERSION=4.21,feature.node.kubernetes.io/system-os_release.OSTREE_VERSION=10.1.20260126-0,feature.node.kubernetes.io/system-os_release.VERSION_ID.major=10,feature.node.kubernetes.io/system-os_release.VERSION_ID.minor=1,feature.node.kubernetes.io/system-os_release.VERSION_ID=10.1,kubernetes.io/arch=arm64,kubernetes.io/hostname=erife-arm-openshift-4-21-5-gpu02,kubernetes.io/os=linux,machine-type.node.kubevirt.io/virt-rhel9.0.0=true,machine-type.node.kubevirt.io/virt-rhel9.2.0=true,machine-type.node.kubevirt.io/virt-rhel9.4.0=true,machine-type.node.kubevirt.io/virt-rhel9.6.0=true,machine-type.node.kubevirt.io/virt=true,network.nvidia.com/operator.mofed.wait=false,network.nvidia.com/operator.nic-configuration.wait=false,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhel,nvidia.com/gpu-driver-upgrade-state=upgrade-done,nvidia.com/gpu.deploy.container-toolkit=true,nvidia.com/gpu.deploy.dcgm-exporter=true,nvidia.com/gpu.deploy.dcgm=true,nvidia.com/gpu.deploy.device-plugin=true,nvidia.com/gpu.deploy.driver=true,nvidia.com/gpu.deploy.gpu-feature-discovery=true,nvidia.com/gpu.deploy.node-status-exporter=true,nvidia.com/gpu.deploy.nvsm=,nvidia.com/gpu.deploy.operator-validator=true,nvidia.com/gpu.present=true,topology.topolvm.io/node=erife-arm-openshift-4-21-5-gpu02
+erife-arm-openshift-4-21-5-gpu03   Ready    control-plane,master,worker   2d20h   v1.34.2   beta.kubernetes.io/arch=arm64,beta.kubernetes.io/os=linux,cpumanager=false,feature.node.kubernetes.io/cpu-cpuid.AES=true,feature.node.kubernetes.io/cpu-cpuid.ASIMD=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDDP=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDFHM=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDHP=true,feature.node.kubernetes.io/cpu-cpuid.ASIMDRDM=true,feature.node.kubernetes.io/cpu-cpuid.ATOMICS=true,feature.node.kubernetes.io/cpu-cpuid.BF16=true,feature.node.kubernetes.io/cpu-cpuid.BTI=true,feature.node.kubernetes.io/cpu-cpuid.CPUID=true,feature.node.kubernetes.io/cpu-cpuid.CRC32=true,feature.node.kubernetes.io/cpu-cpuid.DCPODP=true,feature.node.kubernetes.io/cpu-cpuid.DCPOP=true,feature.node.kubernetes.io/cpu-cpuid.DGH=true,feature.node.kubernetes.io/cpu-cpuid.DIT=true,feature.node.kubernetes.io/cpu-cpuid.EVTSTRM=true,feature.node.kubernetes.io/cpu-cpuid.FCMA=true,feature.node.kubernetes.io/cpu-cpuid.FLAGM2=true,feature.node.kubernetes.io/cpu-cpuid.FLAGM=true,feature.node.kubernetes.io/cpu-cpuid.FP=true,feature.node.kubernetes.io/cpu-cpuid.FPHP=true,feature.node.kubernetes.io/cpu-cpuid.FRINT=true,feature.node.kubernetes.io/cpu-cpuid.I8MM=true,feature.node.kubernetes.io/cpu-cpuid.ILRCPC=true,feature.node.kubernetes.io/cpu-cpuid.JSCVT=true,feature.node.kubernetes.io/cpu-cpuid.LRCPC=true,feature.node.kubernetes.io/cpu-cpuid.PACA=true,feature.node.kubernetes.io/cpu-cpuid.PACG=true,feature.node.kubernetes.io/cpu-cpuid.PMULL=true,feature.node.kubernetes.io/cpu-cpuid.SB=true,feature.node.kubernetes.io/cpu-cpuid.SHA1=true,feature.node.kubernetes.io/cpu-cpuid.SHA2=true,feature.node.kubernetes.io/cpu-cpuid.SHA3=true,feature.node.kubernetes.io/cpu-cpuid.SHA512=true,feature.node.kubernetes.io/cpu-cpuid.SM3=true,feature.node.kubernetes.io/cpu-cpuid.SM4=true,feature.node.kubernetes.io/cpu-cpuid.SVE2=true,feature.node.kubernetes.io/cpu-cpuid.SVE=true,feature.node.kubernetes.io/cpu-cpuid.SVEAES=true,feature.node.kubernetes.io/cpu-cpuid.SVEBF16=true,feature.node.kubernetes.io/cpu-cpuid.SVEBITPERM=true,feature.node.kubernetes.io/cpu-cpuid.SVEI8MM=true,feature.node.kubernetes.io/cpu-cpuid.SVEPMULL=true,feature.node.kubernetes.io/cpu-cpuid.SVESHA3=true,feature.node.kubernetes.io/cpu-cpuid.SVESM4=true,feature.node.kubernetes.io/cpu-cpuid.USCAT=true,feature.node.kubernetes.io/cpu-hardware_multithreading=false,feature.node.kubernetes.io/cpu-model.family=15,feature.node.kubernetes.io/cpu-model.id=54512,feature.node.kubernetes.io/cpu-model.vendor_id=ARM,feature.node.kubernetes.io/kernel-config.NO_HZ=true,feature.node.kubernetes.io/kernel-config.NO_HZ_FULL=true,feature.node.kubernetes.io/kernel-selinux.enabled=true,feature.node.kubernetes.io/kernel-version.full=6.12.0-211.4.el10nv.aarch64_64k,feature.node.kubernetes.io/kernel-version.major=6,feature.node.kubernetes.io/kernel-version.minor=12,feature.node.kubernetes.io/kernel-version.revision=0,feature.node.kubernetes.io/memory-numa=true,feature.node.kubernetes.io/network-sriov.capable=true,feature.node.kubernetes.io/pci-10de.present=true,feature.node.kubernetes.io/pci-10de.sriov.capable=true,feature.node.kubernetes.io/pci-15b3.present=true,feature.node.kubernetes.io/pci-15b3.sriov.capable=true,feature.node.kubernetes.io/pci-1a03.present=true,feature.node.kubernetes.io/pci-8086.present=true,feature.node.kubernetes.io/rdma.capable=true,feature.node.kubernetes.io/storage-nonrotationaldisk=true,feature.node.kubernetes.io/system-os_release.ID=rhel,feature.node.kubernetes.io/system-os_release.OPENSHIFT_VERSION=4.21,feature.node.kubernetes.io/system-os_release.OSTREE_VERSION=10.1.20260126-0,feature.node.kubernetes.io/system-os_release.VERSION_ID.major=10,feature.node.kubernetes.io/system-os_release.VERSION_ID.minor=1,feature.node.kubernetes.io/system-os_release.VERSION_ID=10.1,kubernetes.io/arch=arm64,kubernetes.io/hostname=erife-arm-openshift-4-21-5-gpu03,kubernetes.io/os=linux,machine-type.node.kubevirt.io/virt-rhel9.0.0=true,machine-type.node.kubevirt.io/virt-rhel9.2.0=true,machine-type.node.kubevirt.io/virt-rhel9.4.0=true,machine-type.node.kubevirt.io/virt-rhel9.6.0=true,machine-type.node.kubevirt.io/virt=true,network.nvidia.com/operator.mofed.wait=false,network.nvidia.com/operator.nic-configuration.wait=false,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhel,nvidia.com/gpu-driver-upgrade-state=upgrade-done,nvidia.com/gpu.deploy.container-toolkit=true,nvidia.com/gpu.deploy.dcgm-exporter=true,nvidia.com/gpu.deploy.dcgm=true,nvidia.com/gpu.deploy.device-plugin=true,nvidia.com/gpu.deploy.driver=true,nvidia.com/gpu.deploy.gpu-feature-discovery=true,nvidia.com/gpu.deploy.node-status-exporter=true,nvidia.com/gpu.deploy.nvsm=,nvidia.com/gpu.deploy.operator-validator=true,nvidia.com/gpu.present=true,topology.topolvm.io/node=erife-arm-openshift-4-21-5-gpu03
 ~~~
 
 If everything is still looking good we can now move onto installing the NVIDIA GPU Operator.  The first step here is to generate the NVIDIA Network Operator custom resource file.
@@ -227,13 +230,18 @@ EOF
 Now we can create the NVIDIA Operator on the cluster.
 
 ~~~bash
-$ oc create -f nvidia-gpu-operator.yaml
+$ oc create -f nvidia-gpu-operator.yaml 
+namespace/nvidia-gpu-operator created
+operatorgroup.operators.coreos.com/nvidia-gpu-operator created
+subscription.operators.coreos.com/nvidia-gpu-operator created
 ~~~
 
 We can validate the operator is running with the following.
 
 ~~~bash
 $ oc get pods -n nvidia-gpu-operator
+NAME                            READY   STATUS    RESTARTS   AGE
+gpu-operator-84db6657f7-dqrrv   1/1     Running   0          24s
 ~~~
 
 Finally we are ready to deploy our gpu cluster policy.   The following is an example cluster policy we used in this environment.  I should point out at the time of this writing we required a special build driver container from NVIDIA as the default one that came with v26.3 of the GPU Operator did not work for us.   This is why we see the repository as `quay.io/redhat_emp1/ecosys-nvidia` for the driver because that is where we staged our driver. 
@@ -268,7 +276,7 @@ spec:
     enabled: true
   cdi:
     default: false
-    enabled: false
+    enabled: true
     nriPluginEnabled: false
   driver:
     licensingConfig:
@@ -347,3 +355,123 @@ spec:
     enabled: true
 EOF
 ~~~
+
+Now let's take the GPU cluster policy and create it on the cluster.
+
+~~~bash
+$ oc create -f gpu-clusterpolicy.yaml 
+clusterpolicy.nvidia.com/gpu-cluster-policy created
+~~~
+
+After a few minutes we can validate that the pods are running.
+
+~~~bash
+$ oc get pods -n nvidia-gpu-operator
+NAME                                            READY   STATUS      RESTARTS      AGE
+gpu-feature-discovery-fwh9n                     1/1     Running     0             3m23s
+gpu-feature-discovery-gpzws                     1/1     Running     0             3m23s
+gpu-feature-discovery-mh4xq                     1/1     Running     1             3m23s
+gpu-operator-84db6657f7-dqrrv                   1/1     Running     0             15m
+nvidia-container-toolkit-daemonset-7zfxd        1/1     Running     0             3m23s
+nvidia-container-toolkit-daemonset-mgn4v        1/1     Running     0             3m23s
+nvidia-container-toolkit-daemonset-v7fxv        1/1     Running     0             3m23s
+nvidia-cuda-validator-j6r2t                     0/1     Completed   0             2m12s
+nvidia-cuda-validator-jbrrb                     0/1     Completed   0             2m12s
+nvidia-cuda-validator-snctg                     0/1     Completed   0             2m13s
+nvidia-dcgm-dkb6c                               0/1     Running     0             3m23s
+nvidia-dcgm-exporter-d2fcd                      1/1     Running     3 (85s ago)   3m23s
+nvidia-dcgm-exporter-s5lnr                      1/1     Running     3 (90s ago)   3m23s
+nvidia-dcgm-exporter-zc8gz                      0/1     Running     2 (17s ago)   3m23s
+nvidia-dcgm-mcstq                               1/1     Running     0             3m23s
+nvidia-dcgm-vq6wn                               1/1     Running     0             3m23s
+nvidia-device-plugin-daemonset-bmgfx            1/1     Running     0             3m23s
+nvidia-device-plugin-daemonset-dxtkp            1/1     Running     0             3m23s
+nvidia-device-plugin-daemonset-sgqtt            1/1     Running     0             3m23s
+nvidia-driver-daemonset-10.1.20260126-0-f8q47   3/3     Running     0             4m25s
+nvidia-driver-daemonset-10.1.20260126-0-mqxw8   3/3     Running     0             4m25s
+nvidia-driver-daemonset-10.1.20260126-0-s7grg   3/3     Running     0             4m25s
+nvidia-mig-manager-7tnmt                        1/1     Running     0             117s
+nvidia-mig-manager-sj667                        1/1     Running     0             58s
+nvidia-node-status-exporter-4r8bv               1/1     Running     0             4m22s
+nvidia-node-status-exporter-crlcx               1/1     Running     0             4m22s
+nvidia-node-status-exporter-ljbp8               1/1     Running     0             4m22s
+nvidia-operator-validator-6vrbb                 1/1     Running     0             3m23s
+nvidia-operator-validator-grcd5                 1/1     Running     0             3m23s
+nvidia-operator-validator-z6p6w                 1/1     Running     0             3m23s
+~~~
+
+We can `rsh` into any one of the nvidia-driver-daemonset pods and execute `nvidia-smi` and show that the GPUs are reporting.
+
+~~~bash
+$ oc rsh -n nvidia-gpu-operator nvidia-driver-daemonset-10.1.20260126-0-f8q47
+sh-5.2# nvidia-smi
+Thu Mar 26 17:37:17 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.126.09             Driver Version: 580.126.09     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GB200                   On  |   00000008:01:00.0 Off |                    0 |
+| N/A   29C    P0            162W / 1200W |       0MiB / 189471MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA GB200                   On  |   00000009:01:00.0 Off |                    0 |
+| N/A   29C    P0            149W / 1200W |       0MiB / 189471MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA GB200                   On  |   00000018:01:00.0 Off |                    0 |
+| N/A   29C    P0            153W / 1200W |       0MiB / 189471MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA GB200                   On  |   00000019:01:00.0 Off |                    0 |
+| N/A   29C    P0            172W / 1200W |       0MiB / 189471MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+sh-5.2# nvidia-smi topo -m
+        GPU0    GPU1    GPU2    GPU3    NIC0    NIC1    NIC2    NIC3    NIC4    NIC5    NIC6    NIC7    CPU Affinity    NUMA Affinity   GPU NUMA ID
+GPU0     X      NV18    NV18    NV18    SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS     0-71    0,2-17          N/A
+GPU1    NV18     X      NV18    NV18    SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS     0-71    0,2-17          N/A
+GPU2    NV18    NV18     X      NV18    SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS     72-143  1,18-33         N/A
+GPU3    NV18    NV18    NV18     X      SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS     72-143  1,18-33         N/A
+NIC0    SYS     SYS     SYS     SYS      X      SYS     SYS     SYS     SYS     SYS     SYS     SYS
+NIC1    SYS     SYS     SYS     SYS     SYS      X      SYS     SYS     SYS     SYS     SYS     SYS
+NIC2    SYS     SYS     SYS     SYS     SYS     SYS      X      PIX     SYS     SYS     SYS     SYS
+NIC3    SYS     SYS     SYS     SYS     SYS     SYS     PIX      X      SYS     SYS     SYS     SYS
+NIC4    SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS      X      SYS     SYS     SYS
+NIC5    SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS      X      SYS     SYS
+NIC6    SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS      X      PIX
+NIC7    SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS     SYS     PIX      X 
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing at most a single PCIe bridge
+  NV#  = Connection traversing a bonded set of # NVLinks
+
+NIC Legend:
+
+  NIC0: mlx5_0
+  NIC1: mlx5_1
+  NIC2: mlx5_2
+  NIC3: mlx5_3
+  NIC4: mlx5_4
+  NIC5: mlx5_5
+  NIC6: mlx5_6
+  NIC7: mlx5_7
+~~~
+
+This concludes the experience!
