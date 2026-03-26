@@ -16,7 +16,17 @@ erife-arm-openshift-4-21-5-gpu02   5.14.0-570.96.1.el9_6.aarch64
 erife-arm-openshift-4-21-5-gpu03   5.14.0-570.96.1.el9_6.aarch64
 ~~~~
 
-However we want to get them to a RHEL10 state and so the process begins.
+However we want to get them to a RHEL4NV state and so the process begins.
+
+
+## Workflow Sections
+
+- [Kernel Machine Configuration](#kernel-machine-configuration)
+- [Driver ToolKit Image](#driver-toolkit-image)
+- [NFD Operator](#nfd-operator)
+- [NVIDIA Network Operator](#nvidia-network-operator)
+- [NVIDIA GPU Operator](#nvidia-gpu-operator)
+- [OpenShift Virtualization](#openshift-virtualization)
 
 ## Kernel Machine Configuration
 
@@ -732,4 +742,6 @@ NIC Legend:
   NIC7: mlx5_7
 ~~~
 
-This concludes the experience!
+## OpenShift Virtualization
+
+After we have the NVIDIA operators installed we need to also get the OpenShift Virtualization operator installed.
