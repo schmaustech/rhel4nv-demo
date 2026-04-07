@@ -92,7 +92,7 @@ erife-arm-openshift-4-21-5-gpu03   6.12.0-211.4.el10nv.aarch64+64k
 Now we can proceed to ensuring we have the right DTK image tagged.  Since we changed the kernel of our OpenShift environment we need to also point to a DTK image that is updated with our kernel version.   While you can build an updated DTK image I am using a pre-built one `quay.io/ravanelli/staging:dtk-4nv-03262026-211.4el0nv` known to work with this kernel version.   To ensure the GPU operator will pick it up we will run the following command to setup the tag.
 
 ~~~bash
-$ oc tag -n quay.io/ravanelli/staging:dtk-4nv-03262026-211.4el0nv openshift/driver-toolkit:10.1.20260126-0
+$ oc tag quay.io/ravanelli/staging:dtk-4nv-03262026-211.4el0nv openshift/driver-toolkit:10.1.20260126-0
 Tag driver-toolkit:10.1.20260126-0 set to quay.io/ravanelli/staging:dtk-4nv-03262026-211.4el0nv.
 ~~~
 
